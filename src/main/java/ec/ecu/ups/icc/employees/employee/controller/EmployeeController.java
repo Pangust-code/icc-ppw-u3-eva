@@ -15,8 +15,12 @@ import ec.ecu.ups.icc.employees.employee.service.EmployeeService;
 @RequestMapping("/api/employees")
 public class EmployeeController {
     
-    @Autowired
+    
     private EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
     
     @PatchMapping("/{employeeId}/transfer")
     public ResponseEntity<EmployeeTransferResponseDto> transferEmployee(
