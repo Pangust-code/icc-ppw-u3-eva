@@ -16,8 +16,6 @@ public class departmentController {
 
     private DepartmentService departmentService;
 
-    
-
     public departmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
