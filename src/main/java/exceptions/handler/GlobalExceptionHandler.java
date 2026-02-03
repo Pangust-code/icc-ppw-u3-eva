@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import exceptions.base.ApplicationException;
-import exceptions.domain.ConflictException;
-import exceptions.domain.NotFoundException;
 import exceptions.response.ErrorResponse;
 
 
