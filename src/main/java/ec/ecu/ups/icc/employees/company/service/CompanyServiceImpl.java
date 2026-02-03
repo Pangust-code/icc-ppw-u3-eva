@@ -1,6 +1,7 @@
 package ec.ecu.ups.icc.employees.company.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,10 @@ import ec.ecu.ups.icc.employees.company.dtos.CompanyDepartmentsDto;
 import ec.ecu.ups.icc.employees.company.dtos.EmplooyeesResponseDto;
 import ec.ecu.ups.icc.employees.company.models.companyEntity;
 import ec.ecu.ups.icc.employees.company.repository.companyRepository;
+import ec.ecu.ups.icc.employees.departament.dtos.DepartmentDto;
+import ec.ecu.ups.icc.employees.departament.models.departmentEntity;
 import ec.ecu.ups.icc.employees.employee.dtos.EmployeeDto;
+import ec.ecu.ups.icc.employees.employee.models.employeeEntity;
 import ec.ecu.ups.icc.employees.employee.repository.employeeRepository;
 import exceptions.domain.NotFoundException;
 
@@ -31,25 +35,23 @@ public class CompanyServiceImpl implements companyService {
         companyEntity company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new NotFoundException("Compañía no encontrada con id: " + companyId));
 
-        List<ec.ecu.ups.icc.employees.departament.dtos.DepartmentDto> departmentDtos = new java.util.ArrayList<>();
-        java.math.BigDecimal totalBudget = java.math.BigDecimal.ZERO;
+        List<DepartmentDto> departmentDtos = new ArrayList<>();
+        BigDecimal totalBudget = BigDecimal.ZERO;
         
         if (company.getDepartments() != null) {
             departmentDtos = company.getDepartments().stream()
-                    .map(dept -> new ec.ecu.ups.icc.employees.departament.dtos.DepartmentDto(
+                    .map(dept -> new DepartmentDto(
                         dept.getId(),
                         dept.getName(),
                         dept.getBudget()
                     ))
-                    .collect(java.util.stream.Collectors.toList());
-            
-            // Calcular el presupuesto total
+                    .collect(Collectors.toList());
+
             totalBudget = company.getDepartments().stream()
-                    .map(ec.ecu.ups.icc.employees.departament.models.departmentEntity::getBudget)
-                    .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
+                    .map(departmentEntity::getBudget)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
         }
         
-        // Crear el DTO de respuesta
         CompanyDepartmentsDto dto = new CompanyDepartmentsDto();
         dto.setCompanyId(company.getId());
         dto.setCompanyName(company.getName());
@@ -72,7 +74,7 @@ public class CompanyServiceImpl implements companyService {
             averageSalary = BigDecimal.ZERO;
         }
 
-        List<ec.ecu.ups.icc.employees.employee.models.employeeEntity> highSalaryEmployees = 
+        List<employeeEntity> highSalaryEmployees = 
                 employeeRepository.findHighSalaryEmployeesByCompany(companyId, averageSalary);
         
 

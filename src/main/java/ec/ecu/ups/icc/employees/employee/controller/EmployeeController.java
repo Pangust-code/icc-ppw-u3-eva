@@ -20,8 +20,8 @@ public class EmployeeController {
     
     @PatchMapping("/{employeeId}/transfer")
     public ResponseEntity<EmployeeTransferResponseDto> transferEmployee(
-            @PathVariable Long employeeId,
-            @RequestParam Long departmentId) {
+            @PathVariable("employeeId") Long employeeId,
+            @RequestParam("departmentId") Long departmentId) {
         EmployeeTransferResponseDto response = employeeService.transferEmployee(employeeId, departmentId);
         return ResponseEntity.ok(response);
     }

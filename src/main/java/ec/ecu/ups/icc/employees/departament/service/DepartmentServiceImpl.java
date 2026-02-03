@@ -34,16 +34,15 @@ public class DepartmentServiceImpl implements DepartmentService {
                     .collect(Collectors.toList());
         }
 
-        // Calcular el total de salarios
         BigDecimal totalSalaries = employeeDtos.stream()
                 .map(EmployeeDto::getSalary)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // Crear el DTO de respuesta
         DepartmentWithEmployeesDto dto = new DepartmentWithEmployeesDto();
-        dto.setDepartmentId(department.getId());
-        dto.setDepartmentName(department.getName());
+        dto.setId(department.getId());
+        dto.setName(department.getName());
         dto.setBudget(department.getBudget());
+        dto.setCompany(department.getCompany());
         dto.setEmployees(employeeDtos);
         dto.setEmployeeCount(employeeDtos.size());
         dto.setTotalSalaries(totalSalaries);

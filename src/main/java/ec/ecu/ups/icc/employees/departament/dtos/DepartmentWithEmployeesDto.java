@@ -8,10 +8,10 @@ import ec.ecu.ups.icc.employees.employee.dtos.EmployeeDto;
 
 public class DepartmentWithEmployeesDto {
     
-    private Long departmentId;
-    private String departmentName;
+    private Long id;
+    private String name;
     private BigDecimal budget;
-    private List<companyEntity> companies;
+    private companyEntity company;
     private List<EmployeeDto> employees;
     private int employeeCount;
     private BigDecimal totalSalaries;
@@ -21,30 +21,30 @@ public class DepartmentWithEmployeesDto {
     }
 
 
-    public DepartmentWithEmployeesDto(Long departmentId, String departmentName, List<EmployeeDto> employees, BigDecimal budget, List<companyEntity> companies, int employeeCount, BigDecimal totalSalaries) {
-        this.departmentId = departmentId;
-        this.departmentName = departmentName;
+    public DepartmentWithEmployeesDto(Long id, String name, List<EmployeeDto> employees, BigDecimal budget, companyEntity company, int employeeCount, BigDecimal totalSalaries) {
+        this.id = id;
+        this.name = name;
         this.employees = employees;
         this.budget = budget;
-        this.companies = companies;
+        this.company = company;
         this.employeeCount = employeeCount;
         this.totalSalaries = totalSalaries;
     }
 
-    public Long getDepartmentId() {
-        return departmentId;
+    public Long getId() {
+        return id;
     }
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
+    public String getName() {
+        return name;
     }
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<EmployeeDto> getEmployees() {
@@ -63,12 +63,12 @@ public class DepartmentWithEmployeesDto {
         this.budget = budget;
     }
 
-    public List<companyEntity> getCompanies() {
-        return companies;
+    public companyEntity getCompany() {
+        return company;
     }
 
-    public void setCompanies(List<companyEntity> companies) {
-        this.companies = companies;
+    public void setCompany(companyEntity company) {
+        this.company = company;
     }
 
 

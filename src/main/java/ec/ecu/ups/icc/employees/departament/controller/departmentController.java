@@ -14,11 +14,18 @@ import ec.ecu.ups.icc.employees.departament.service.DepartmentService;
 @RequestMapping("/api/departments")
 public class departmentController {
     
-    @Autowired
+
     private DepartmentService departmentService;
 
+    
+
+    public departmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
+
+
     @GetMapping("/{id}/employees")
-    public ResponseEntity<DepartmentWithEmployeesDto> getDepartmentEmployees(@PathVariable Long id) {
+    public ResponseEntity<DepartmentWithEmployeesDto> getDepartmentEmployees(@PathVariable("id") Long id) {
         DepartmentWithEmployeesDto department = departmentService.getDepartmentWithEmployees(id);
         return ResponseEntity.ok(department);
     }

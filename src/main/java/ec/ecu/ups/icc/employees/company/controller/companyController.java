@@ -1,6 +1,5 @@
 package ec.ecu.ups.icc.employees.company.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,17 +14,23 @@ import ec.ecu.ups.icc.employees.company.service.companyService;
 @RequestMapping("/api/companies")
 public class companyController {
     
-    @Autowired
+
     private companyService companyService;
+
     
+    
+    public companyController(companyService companyService) {
+        this.companyService = companyService;
+    }
+
     @GetMapping("/{id}/departments")
-    public ResponseEntity<CompanyDepartmentsDto> getCompanyDepartments(@PathVariable Long id) {
+    public ResponseEntity<CompanyDepartmentsDto> getCompanyDepartments(@PathVariable("id") Long id) {
         CompanyDepartmentsDto company = companyService.getCompanyWithDepartments(id);
         return ResponseEntity.ok(company);
     }
     
     @GetMapping("/{id}/high-salary-employees")
-    public ResponseEntity<EmplooyeesResponseDto> getHighSalaryEmployees(@PathVariable Long id) {
+    public ResponseEntity<EmplooyeesResponseDto> getHighSalaryEmployees(@PathVariable("id") Long id) {
         EmplooyeesResponseDto response = companyService.getEmployeesStatisticsByCompany(id);
         return ResponseEntity.ok(response);
     }
